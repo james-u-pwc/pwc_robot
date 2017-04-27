@@ -1,0 +1,4 @@
+<launch>
+  <include file="$(find robot_driver)/launch/robot_launch.launch" />
+  <include file="$(find cartographer_ros)/launch/pwc_carto_mapping_2d.launch" />
+</launch>

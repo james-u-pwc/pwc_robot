@@ -1,0 +1,28 @@
+<launch>
+  <include file="$(find robot_driver)/launch/robot_launch.launch" />
+
+  <node pkg="hector_mapping" type="hector_mapping" name="hector_mapping" output="screen">
+    <param name="base_frame" value="base_link"/>
+    <param name="odom_frame" value="/hector_odom"/>
+    
+    <remap from="scan" to="/laser_scan"/>
+    <remap from="map" to="/hector_map"/>
+    <remap from="map_metadata" to="/hector_map_metadata"/>
+
+    <param name="map_resolution" value="0.05"/>
+    <param name="map_size" value="4000"/>
+
+    <param name="maxRange" value="6.0"/>
+  </node>
+
+  <include file="$(find robot_localization)/launch/pwc_ekf.launch" />
+
+  <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
+    <param name="base_frame" value="base_link"/>
+    <param name="odom_frame" value="/odom"/>
+    
+    <remap from="scan" to="/laser_scan"/>
+
+    <param name="maxRange" value="6.0"/>
+  </node>
+</launch>

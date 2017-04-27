@@ -1,0 +1,11 @@
+<launch>
+  <include file="$(find robot_driver)/launch/robot_launch.launch" />
+
+  <node name="map_server" pkg="map_server" type="map_server" args="$(find pwc_navigation)/maps/map.yaml"/>
+
+  <include file="$(find pwc_navigation)/launch/amcl.launch" />
+
+  <include file="$(find pwc_navigation)/launch/obstacles.launch" />
+
+  <include file="$(find pwc_navigation)/launch/navigation.launch" />
+</launch>
